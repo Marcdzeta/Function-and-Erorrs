@@ -12,32 +12,27 @@ of require, assert and revert.
 /*REQUIREMENTS: For this project, write a smart contract that implements the require(), assert() and revert() statements.
 
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.0;
+pragma solidity >=0.6.12 <0.9.0;
 
-contract ErrorHandlingExample {
-    uint256 public value;
-
-   
-    function setValue(uint256 _value) public {
-       
-        require(_value > 0, "Value must be greater than zero");
-        
-        value = _value;
+contract ErrorHandling {
+    function revertExample(uint _num) public pure returns (uint) {
+        if (_num == 1) {
+            revert("Number cannot be one");
+        }
+        return _num;
     }
 
-   
-    function checkInvariant() public view {
-       
-        assert(value != 0);
+    function requireExample(uint _num) public pure returns (uint) {
+        require(_num > 1, "Number must be greater than one");
+        return _num;
     }
 
-  
-    function triggerRevert() public pure {
-        
-        revert("This function always reverts");
+    function assertExample(uint _num) public pure returns (uint) {
+        uint result = _num * 2;
+        assert(result > _num);
+        return result; 
     }
 }
-
 ## Executing Program
 To run this program, you can use Remix, an online Solidity IDE. To get started, go to the Remix website at https://remix.ethereum.org/. 
 Once you are on the Remix website, create a new file by clicking on the "+" icon in the left-hand sidebar. Save the file with a .sol extension 
